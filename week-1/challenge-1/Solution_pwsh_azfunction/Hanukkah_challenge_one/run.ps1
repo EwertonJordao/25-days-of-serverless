@@ -9,8 +9,11 @@ $Hanukkah = @(
     "ה (Hay)",
     "ש (Shin)"
 )
+$dice = New-Object PSCustomObject @{
+    Val = (Get-Random $Hanukkah -Minimum 0)
+}
 $status = [HttpStatusCode]::OK
-$body = (Get-Random $Hanukkah | ConvertTo-Json  )           
+$body = ($dice | ConvertTo-Json)           
 
 Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
         headers    = @{'content-type' = 'application/json'; "charset" = "utf-8" }
